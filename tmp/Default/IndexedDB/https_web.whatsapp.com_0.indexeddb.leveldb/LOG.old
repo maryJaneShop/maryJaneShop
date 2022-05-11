@@ -1,0 +1,5 @@
+2022/04/30-18:45:02.957 1828 Creating DB C:\Users\jesus\Website\ecommerce\ecommerce\tmp\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb since it was missing.
+2022/04/30-18:45:02.969 1828 Reusing MANIFEST C:\Users\jesus\Website\ecommerce\ecommerce\tmp\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2022/04/30-18:45:30.358 b5c Level-0 table #5: started
+2022/04/30-18:45:30.394 b5c Level-0 table #5: 1204019 bytes OK
+2022/04/30-18:45:30.395 b5c Delete type=0 #3
