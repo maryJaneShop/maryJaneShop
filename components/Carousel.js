@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
-import {motion} from "framer-motion";
-import {urlFor} from "../lib/client";
 
 export const CarouselItem = ({ children, width }) => {
     return (

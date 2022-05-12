@@ -3,7 +3,7 @@ import {motion} from "framer-motion";
 
 const CustomButton = ({label, onClick}) => {
     return (
-        <motion.button onClick={onClick} whileInView={{opacity: [0, 1]}} transition={{duration: 1}} className="cta">
+        <motion.button onClick={onClick} whileInView={{opacity: [0, 1]}} transition={{duration: 0.5}} className="cta">
             <span className="hover-underline-animation">{label}</span>
             <svg id="arrow-horizontal" xmlns="http://www.w3.org/2000/svg" width="30" height="10" viewBox="0 0 46 16">
                 <path id="Path_10" data-name="Path 10"

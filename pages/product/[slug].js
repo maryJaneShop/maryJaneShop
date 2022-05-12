@@ -19,14 +19,11 @@ import Loader from "../../components/Loader";
 const ProductDetails = ({product, products}) => {
     const {image, name, details, price, unity} = product;
     const [index, setIndex] = useState(0);
-    const {decQty, incQty, qty, onAdd, setShowCart, loading} = useStateContext();
+    const {decQty, incQty, qty, onAdd, setShowCart, setQty, totalQuantities} = useStateContext();
 
     const handleDragStart = (e) => e.preventDefault();
-    const settings = {
-        dots: true,
 
-    };
-    const itemsCarousel = products.map((item) => (
+/*    const itemsCarousel = products.map((item) => (
         <Product key={item._id} product={item} handleDragStart={handleDragStart}/>
     ))
     const renderSlides = () =>
@@ -34,10 +31,9 @@ const ProductDetails = ({product, products}) => {
             <div>
                 <h3>Slide {num}</h3>
             </div>
-        ));
+        ));*/
     const handleBuyNow = () => {
         onAdd(product, qty);
-
         setShowCart(true);
     }
     return (
@@ -82,18 +78,21 @@ const ProductDetails = ({product, products}) => {
                     <div className="quantity">
                         {/*<h3>Quantity:</h3>*/}
                         <p className="price">${price} (MXN)</p>
-                        <span className="num">{qty}</span>
-                        <span className="unity">({unity})</span>
-                        <p className="quantity-desc">
+                        {/*<span className="num">{qty}</span>*/}
+                        <span className="unity">/ ({unity})</span>
+                        {/*<p className="quantity-desc">
                             <span className="plus" onClick={incQty}><AiOutlinePlus/></span>
                             <span className="minus" onClick={decQty}><AiOutlineMinus/></span>
-                        </p>
+                        </p>*/}
                     </div>
                     <div className="buttons">
                         <button type="button" className="add-to-cart" onClick={() => onAdd(product, qty)}>
                             Añadir al Carrito
                         </button>
-                        <button type="button" className="buy-now" onClick={handleBuyNow}>Comprar Ahora</button>
+                        <button type="button" className="buy-now"
+                                onClick={() => setShowCart(true)} >
+                            Abrir carrito
+                        </button>
                     </div>
                 </div>
             </div>

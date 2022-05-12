@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { motion } from "framer-motion";
 import Backdrop from "./Backdrop";
 import {AiOutlineClose, AiOutlineLeft, AiOutlineWhatsApp} from "react-icons/ai";
@@ -28,14 +28,15 @@ const dropIn = {
 };
 
 
-const Modal = ({ handleClose, cartItems, userName }) => {
+const Modal = ({ handleClose, cartItems }) => {
+
+    const [keyword, setKeyword] = useState("");
     const order = (cartItems.length >= 1 && cartItems.map((item, index) => (item.name) + " (" + (item.quantity)
         +" g)"))
 
     function SendMessage() {
-        let name = userName
         let url = "https://api.whatsapp.com/send?phone=522462224323&text=¡Hola amigos de MJ SHOP!"
-            + " me gustaría hacer el siguiente pedido: " + order ;
+            + " me gustaría hacer el siguiente pedido: " + order + "." + " Y mi palabra clave será: " + "*"+keyword+"*" ;
         window.open(url);
     }
 
@@ -58,7 +59,16 @@ const Modal = ({ handleClose, cartItems, userName }) => {
                     <p>
                         ¡Hola amigos de MaryJane SHOP! me gustaría hacer el siguiente pedido:
                     </p>
+
                 <p>{order.join(", ")}</p>
+                    <p>
+                        <br />
+                        <br/>
+                        *Para garantizar una mayor discreción entre el proveedor y tú, deberás indicarle una
+                        palabra clave cuando lo veas.
+                        Por favor, escribe tu palabra clave:
+                        <input value={keyword} onChange={(e) => setKeyword(e.target.value)}/>
+                    </p>
                 </div>
                 <div className="order-bottom">
                     <CustomButton

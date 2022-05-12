@@ -20,7 +20,7 @@ function MyApp({Component, pageProps}) {
     Router.events.on("routeChangeComplete", (url) => {
         /*console.log("Route is complete changed!")*/
         setLoading(false);
-        console.log(loading)
+
     })
 
     return (

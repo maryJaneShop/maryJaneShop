@@ -3,14 +3,12 @@ import {motion} from "framer-motion";
 import CustomButton from "./CustomButton";
 
 
-const SendMessage = ({cartItems, setUsername, userName, onClick}) => {
+const SendMessage = ({cartItems, onClick}) => {
 
 
     return (
         <div className="whatsapp">
-            {/*Name:
-            <input value={userName} onChange={(e) => setUsername(e.target.value)}/>*/}
-            {/*{cartItems.length >= 1 && cartItems.map((item, index) =>
+           {/* {cartItems.length >= 1 && cartItems.map((item, index) =>
                 <p>
                     {item.name} x {item.quantity}
                 </p>

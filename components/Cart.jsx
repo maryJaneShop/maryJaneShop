@@ -1,6 +1,13 @@
 import React, {useRef, useState} from 'react';
 import Link from 'next/link';
-import {AiOutlineMinus, AiOutlinePlus, AiOutlineLeft, AiOutlineShopping} from 'react-icons/ai';
+import {
+    AiOutlineMinus,
+    AiOutlinePlus,
+    AiOutlineLeft,
+    AiOutlineShopping,
+    AiOutlineFieldTime,
+    AiFillStop, AiOutlineStop, AiFillShop, AiOutlineShoppingCart
+} from 'react-icons/ai';
 import {TiDeleteOutline} from 'react-icons/ti';
 import toast from 'react-hot-toast';
 
@@ -21,13 +28,12 @@ const Cart = () => {
         setShowCart,
         toggleCartItemQuantity,
         onRemove,
-        onAdd
+        onAdd, qty, setQty, incQty
     } = useStateContext();
 
-    const [userName, setUsername] = useState("");
+
 
     const [modalOpen, setModalOpen] = useState(false);
-
     const close = () => setModalOpen(false);
     const open = () => setModalOpen(true);
 
@@ -57,6 +63,10 @@ const Cart = () => {
         stripe.redirectToCheckout({sessionId: data.id});
     }
 
+    const  handleSubmit = () =>{
+        (modalOpen ? close() : open())
+
+    }
     return (
         <>
 
@@ -73,7 +83,7 @@ const Cart = () => {
                     // Fires when all exiting nodes have completed animating out
                     onExitComplete={() => null}
                 >
-                    {modalOpen && <Modal modalOpen={modalOpen} handleClose={close} userName={userName} cartItems={cartItems} />}
+                    {modalOpen && <Modal modalOpen={modalOpen} handleClose={close} cartItems={cartItems} />}
                 </AnimatePresence>
                 <button
                     type="button"
@@ -86,8 +96,8 @@ const Cart = () => {
 
                 {cartItems.length < 1 && (
                     <div className="empty-cart">
-                        <AiOutlineShopping size={150}/>
-                        <h3>Su bolsa de compras está vacía</h3>
+                        <AiOutlineShoppingCart size={150}/>
+                        <h3>Tu carrito de compras está vacío</h3>
                         {/*<button
                                 type="button"
                                 onClick={() => setShowCart(false)}
@@ -101,7 +111,6 @@ const Cart = () => {
 
                 <div className="product-container">
 
-
                     {cartItems.length >= 1 && cartItems.map((item) => (
                         <div className="product" key={item._id}>
                             <img src={urlFor(item?.image[0])} className="cart-product-image"/>
@@ -113,18 +122,31 @@ const Cart = () => {
                                 <div className="flex bottom">
                                     <div className="quantity">
                                         <p className="quantity-desc-cart">
-                    <span className="minus" onClick={() => toggleCartItemQuantity(item._id, 'dec')}>
+                                            {item.quantity >= 8 ? (
+                                                <span className="minus" onClick={() => toggleCartItemQuantity(item._id, 'dec')}>
                     <AiOutlineMinus/>
                     </span>
+                                            ) : (
+                                                <span className="minus">
+                    <AiOutlineStop />
+                    </span>
+                                            )}
                                             <p className="num">{item.quantity}
                                                 <span className="unity">(g)</span>
                                             </p>
-
-                                            <span className="plus"
-                                                  onClick={() => toggleCartItemQuantity(item._id, 'inc')}
-                                                /*onClick={() => onAdd(qty)}*/>
+                                            {item.quantity <= 27 ? (
+                                                <span className="plus"
+                                                      onClick={() => toggleCartItemQuantity(item._id, 'inc')}
+                                                    /*onClick={incQty}*/
+                                                    /*onClick={() => onAdd(qty)}*/>
                         <AiOutlinePlus/>
                     </span>
+                                            ):(
+                                                <span className="minus">
+                    <AiOutlineStop />
+                    </span>
+                                            )}
+
                                         </p>
                                     </div>
 
@@ -152,8 +174,7 @@ const Cart = () => {
                             {/* <button type="button" className="btn" onClick={handleCheckout}>
                                 Pay with Stripe
                             </button>*/}
-                            <SendMessage onClick={() => (modalOpen ? close() : open())} userName={userName}
-                                         setUsername={setUsername} cartItems={cartItems}/>
+                            <SendMessage onClick={handleSubmit} cartItems={cartItems}/>
                         </div>
                     </div>
 
